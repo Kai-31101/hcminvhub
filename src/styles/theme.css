@@ -44,7 +44,7 @@
   --color-surface-raised: #f9fafb;
   --color-surface-overlay: rgba(17, 24, 39, 0.48);
 
-  --background: #8c8c8c;
+  --background: #ffffff;
   --foreground: var(--color-neutral-900);
   --card: var(--color-surface);
   --card-foreground: var(--color-neutral-900);

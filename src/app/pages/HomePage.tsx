@@ -509,7 +509,7 @@ export default function HomePage() {
   }
 
   return (
-    <div style={homeTheme} className="min-h-screen bg-[linear-gradient(180deg,#8c8c8c_0%,#f3f3f3_22%,#ffffff_100%)] text-[#333333]">
+    <div style={homeTheme} className="min-h-screen bg-white text-[#333333]">
       <header className="sticky top-0 z-40 border-b border-black/5 bg-[rgba(255,255,255,0.84)] backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-8">
           <Link to="/home" className="flex items-center gap-3">
