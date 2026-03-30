@@ -165,7 +165,7 @@ export default function ExplorerPage() {
         {filtered.map((project) => (
           <Link key={project.id} to={`/investor/project/${project.id}`} className="block">
             <DataRow className="group items-stretch gap-5 overflow-hidden p-0">
-              <div className="relative h-full w-full max-w-64 self-stretch overflow-hidden border-r border-border bg-slate-100">
+              <div className="relative w-[320px] shrink-0 self-stretch overflow-hidden border-r border-border bg-slate-100">
                 <ImageWithFallback
                   src={project.image}
                   alt={t(project.name)}
