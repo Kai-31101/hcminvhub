@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, Download, FileText, MapPin, MessageSquare, Send } from 'lucide-react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useApp } from '../../context/AppContext';
+import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 import { DataRow } from '../../components/ui/data-row';
 import { StatusPill } from '../../components/ui/status-pill';
 import { translateText } from '../../utils/localization';
@@ -115,8 +116,8 @@ export default function ProjectDetailPage() {
 
       <section className="section-panel overflow-hidden p-0">
         <div className="relative h-80">
-          <img src={project.image} alt={t(project.name)} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0c2d4a]/92 via-[#0c2d4a]/64 to-[#0c2d4a]/18" />
+          <ImageWithFallback src={project.image} alt={t(project.name)} className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0c2d4a]/72 via-[#0c2d4a]/42 to-[#0c2d4a]/12" />
           <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8">
             <div className="mb-3 flex flex-wrap gap-2">
               <StatusPill tone="info">{t(project.sector)}</StatusPill>

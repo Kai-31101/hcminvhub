@@ -19,6 +19,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { DataRow } from '../components/ui/data-row';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Input } from '../components/ui/input';
 import { StatusPill } from '../components/ui/status-pill';
 import { Textarea } from '../components/ui/textarea';
@@ -878,7 +879,7 @@ export default function HomePage() {
               <Link key={project.id} to={`/investor/project/${project.id}`} className="block">
                 <DataRow className="group items-stretch gap-5 overflow-hidden p-0">
                   <div className="relative w-[320px] shrink-0 self-stretch overflow-hidden border-r border-border bg-slate-100">
-                    <img
+                    <ImageWithFallback
                       src={project.image}
                       alt={t(project.name)}
                       className="absolute inset-0 h-full w-full scale-[1.08] object-cover"
