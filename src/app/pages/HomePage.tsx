@@ -364,6 +364,13 @@ export default function HomePage() {
   const submittedType = new URLSearchParams(location.search).get('submitted');
   const continueRoute = role ? ROLE_HOME_ROUTE[role] : '/login';
   const continueLabel = role ? `${t('Continue to')} ${t(ROLE_LABEL[role])}` : t('Login / create account');
+  const homeTheme = {
+    ['--primary' as string]: '#ED6203',
+    ['--primary-foreground' as string]: '#ffffff',
+    ['--color-primary-700' as string]: '#d95b03',
+    ['--color-primary-900' as string]: '#022582',
+    ['--ring' as string]: 'rgba(237, 98, 3, 0.28)',
+  } as React.CSSProperties;
 
   function scrollToOpportunities() {
     document.getElementById('opportunities')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -502,43 +509,43 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#f5f0e7_0%,#fbfaf6_28%,#ffffff_100%)] text-slate-900">
-      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#fbfaf6]/85 backdrop-blur">
+    <div style={homeTheme} className="min-h-screen bg-[linear-gradient(180deg,#8c8c8c_0%,#f3f3f3_22%,#ffffff_100%)] text-[#333333]">
+      <header className="sticky top-0 z-40 border-b border-black/5 bg-[rgba(255,255,255,0.84)] backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-8">
           <Link to="/home" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#173f35] text-white shadow-[0_12px_30px_rgba(23,63,53,0.18)]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#022582] text-white shadow-[0_12px_30px_rgba(2,37,130,0.22)]">
               <Building2 size={20} />
             </div>
             <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.16em] text-[#8c5a2b]">{t('HCMInvHub')}</div>
-              <div className="text-sm text-slate-600">{t('Lead-generation homepage')}</div>
+              <div className="text-sm font-semibold uppercase tracking-[0.16em] text-[#ED6203]">{t('HCMInvHub')}</div>
+              <div className="text-sm text-[#555555]">{t('Lead-generation homepage')}</div>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
-            <button type="button" onClick={scrollToOpportunities} className="transition-colors hover:text-slate-900">
+          <nav className="hidden items-center gap-6 text-sm font-medium text-[#555555] lg:flex">
+            <button type="button" onClick={scrollToOpportunities} className="transition-colors hover:text-[#022582]">
               {t('Opportunities')}
             </button>
-            <a href="#city-briefing" className="transition-colors hover:text-slate-900">{t('City briefing')}</a>
-            <a href="#support" className="transition-colors hover:text-slate-900">{t('Support')}</a>
+            <a href="#city-briefing" className="transition-colors hover:text-[#022582]">{t('City briefing')}</a>
+            <a href="#support" className="transition-colors hover:text-[#022582]">{t('Support')}</a>
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center overflow-hidden rounded-full border border-[#d7c2a8] bg-white shadow-sm">
+            <div className="flex items-center overflow-hidden rounded-full border border-[#cfcfcf] bg-white shadow-sm">
               {(['vi', 'en'] as const).map((option) => (
                 <button
                   key={option}
                   type="button"
                   onClick={() => setLanguage(option)}
                   className={`px-3 py-2 text-xs font-semibold transition-colors ${
-                    language === option ? 'bg-[#173f35] text-white' : 'text-slate-600 hover:bg-[#f5efe6]'
+                    language === option ? 'bg-[#022582] text-white' : 'text-[#555555] hover:bg-[#f1f1f1]'
                   }`}
                 >
                   {option.toUpperCase()}
                 </button>
               ))}
             </div>
-            <Button className="rounded-full bg-[#173f35] px-5 text-white hover:bg-[#12342c]" asChild>
+            <Button className="rounded-full bg-[#ED6203] px-5 text-white hover:bg-[#d95b03]" asChild>
               <Link to={continueRoute}>{continueLabel}</Link>
             </Button>
           </div>
@@ -561,8 +568,8 @@ export default function HomePage() {
         )}
 
         <section className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[1.02fr,0.98fr] lg:px-8 lg:py-10">
-          <div className="rounded-[2rem] bg-[linear-gradient(135deg,#173f35_0%,#204d41_44%,#8c5a2b_100%)] px-7 py-8 text-white shadow-[0_28px_80px_rgba(23,63,53,0.22)] lg:px-8 lg:py-9">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#f8e9d3]">
+          <div className="rounded-[2rem] bg-[linear-gradient(135deg,#022582_0%,#14349a_42%,#ED6203_100%)] px-7 py-8 text-white shadow-[0_28px_80px_rgba(2,37,130,0.22)] lg:px-8 lg:py-9">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd8bf]">
               <Sparkles size={14} />
               {t('Homepage entry point')}
             </div>
@@ -571,14 +578,14 @@ export default function HomePage() {
               {t('Find Ho Chi Minh City investment opportunities with clearer signals and faster next steps.')}
             </h1>
 
-            <p className="mt-5 max-w-2xl text-base leading-8 text-[#e6efe9]">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[#f0f2ff]">
               {t('View the market, explore curated projects, understand the opportunity, and move into an active lead flow without losing momentum.')}
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
               <Button
                 size="lg"
-                className="rounded-full bg-[#f6c88f] px-6 text-[#173f35] hover:bg-[#f3bb73]"
+                className="rounded-full bg-white px-6 text-[#022582] hover:bg-[#f3f3f3]"
                 onClick={scrollToOpportunities}
               >
                 {t('Explore Opportunities')}
@@ -602,28 +609,28 @@ export default function HomePage() {
               ].map((item) => (
                 <div key={item.label} className="rounded-[1.35rem] border border-white/10 bg-white/10 px-4 py-4 backdrop-blur-sm">
                   <div className="text-2xl font-semibold text-white">{item.value}</div>
-                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0d7b7]">{t(item.label)}</div>
+                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#ffd8bf]">{t(item.label)}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#d9c7b1] bg-[#efe4d4] shadow-[0_28px_80px_rgba(140,90,43,0.16)]">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[#d1d1d1] bg-[#e7e7e7] shadow-[0_28px_80px_rgba(51,51,51,0.14)]">
             <img
               src={heroProject?.image}
               alt={heroProject?.name}
               className="h-full min-h-[460px] w-full object-cover"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,52,44,0.08)_0%,rgba(18,52,44,0.78)_72%,rgba(18,52,44,0.92)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,37,130,0.08)_0%,rgba(2,37,130,0.72)_68%,rgba(51,51,51,0.9)_100%)]" />
 
             <div className="absolute bottom-5 left-5 right-5 space-y-4">
               <div className="max-w-xl rounded-[1.6rem] border border-white/15 bg-white/12 p-5 text-white backdrop-blur-md">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f3d8b1]">{t(heroProject?.sectorGroup ?? '')}</div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#ffd8bf]">{t(heroProject?.sectorGroup ?? '')}</div>
                     <h2 className="mt-2 text-white">{t(heroProject?.name ?? '')}</h2>
                   </div>
-                  <div className="rounded-full bg-[#f6c88f] px-3 py-2 text-xs font-semibold text-[#173f35] shadow-sm">
+                  <div className="rounded-full bg-[#ED6203] px-3 py-2 text-xs font-semibold text-white shadow-sm">
                     {t(heroProject?.projectStatus ?? '')}
                   </div>
                 </div>
@@ -635,7 +642,7 @@ export default function HomePage() {
                     { label: 'Investment type', value: heroProject?.investmentType ?? '' },
                   ].map((item) => (
                     <div key={item.label} className="rounded-xl bg-black/12 px-3 py-3">
-                      <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e2c8a6]">{t(item.label)}</div>
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ffd8bf]">{t(item.label)}</div>
                       <div className="mt-1 text-sm font-semibold text-white">{t(item.value)}</div>
                     </div>
                   ))}
@@ -643,17 +650,17 @@ export default function HomePage() {
               </div>
 
               <div className="grid gap-3 md:grid-cols-2">
-                <div className="rounded-[1.3rem] border border-white/15 bg-[#173f35]/75 px-4 py-4 text-white backdrop-blur-md">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f3d8b1]">
+                <div className="rounded-[1.3rem] border border-white/15 bg-[#022582]/78 px-4 py-4 text-white backdrop-blur-md">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffd8bf]">
                     <CircleDollarSign size={14} />
                     {t('Current opportunity pulse')}
                   </div>
-                  <div className="mt-2 text-sm leading-7 text-[#e7f0eb]">
+                  <div className="mt-2 text-sm leading-7 text-[#eef2ff]">
                     {t('Move from market exploration to structured request creation in one page.')}
                   </div>
                 </div>
                 <div className="rounded-[1.3rem] border border-white/15 bg-white/14 px-4 py-4 text-white backdrop-blur-md">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f3d8b1]">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffd8bf]">
                     <ShieldCheck size={14} />
                     {t('Verified by current project data')}
                   </div>
@@ -667,15 +674,15 @@ export default function HomePage() {
         </section>
 
         <section className="mx-auto max-w-7xl px-6 pb-6 lg:px-8">
-          <Card className="overflow-hidden rounded-[2rem] border-[#d7c2a8] bg-[linear-gradient(135deg,#fff8ef_0%,#fffdf9_55%,#f5efe6_100%)] shadow-[0_24px_60px_rgba(140,90,43,0.08)]">
+          <Card className="overflow-hidden rounded-[2rem] border-[#d1d1d1] bg-[linear-gradient(135deg,#ffffff_0%,#f7f7f7_60%,#ededed_100%)] shadow-[0_24px_60px_rgba(51,51,51,0.08)]">
             <CardContent className="grid gap-6 px-6 py-6 lg:grid-cols-[0.78fr,1.22fr] lg:px-7 lg:py-7">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#173f35]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#173f35]">
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#022582]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#022582]">
                   <Handshake size={14} />
                   {t('Fast track entry')}
                 </div>
                 <h2 className="mt-4">{t("Can't find a suitable project?")}</h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {t('Tell us your needs. We will support you. One short submission lets the team create a request, route it after login, and trigger the right notification path.')}
                 </p>
 
@@ -688,7 +695,7 @@ export default function HomePage() {
                     ['5', 'Trigger notification'],
                   ].map(([index, step]) => (
                     <div key={step} className="flex items-center gap-3">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#173f35] text-xs font-semibold text-white">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#ED6203] text-xs font-semibold text-white">
                         {index}
                       </span>
                       <span>{t(step)}</span>
@@ -697,21 +704,21 @@ export default function HomePage() {
                 </div>
 
                 {matchedProjectForFastTrack && (
-                  <div className="mt-5 rounded-[1.35rem] border border-[#d7c2a8] bg-white px-4 py-4 shadow-sm">
-                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8c5a2b]">{t('Suggested match')}</div>
-                    <div className="mt-1 text-base font-semibold text-slate-900">{t(matchedProjectForFastTrack.name)}</div>
-                    <div className="mt-2 text-sm text-slate-600">
+                  <div className="mt-5 rounded-[1.35rem] border border-[#dadada] bg-white px-4 py-4 shadow-sm">
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#ED6203]">{t('Suggested match')}</div>
+                    <div className="mt-1 text-base font-semibold text-[#333333]">{t(matchedProjectForFastTrack.name)}</div>
+                    <div className="mt-2 text-sm text-[#555555]">
                       {t(matchedProjectForFastTrack.sectorGroup)} • {t(matchedProjectForFastTrack.district)} • {t(matchedProjectForFastTrack.investmentBucket)}
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="rounded-[1.6rem] border border-[#e6d9ca] bg-white p-4 shadow-sm">
+              <div className="rounded-[1.6rem] border border-[#dedede] bg-white p-4 shadow-sm">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8c5a2b]">{t('Single form')}</div>
-                    <div className="mt-1 text-base font-semibold text-slate-900">{t('Express investor intent')}</div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-[#ED6203]">{t('Single form')}</div>
+                    <div className="mt-1 text-base font-semibold text-[#333333]">{t('Express investor intent')}</div>
                   </div>
                   <Button
                     type="button"
@@ -787,17 +794,17 @@ export default function HomePage() {
                     </label>
 
                     <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
-                      <div className="text-sm text-slate-500">
+                      <div className="text-sm text-[#666666]">
                         {role ? t('Submitting now will create a tracked request and notify the matching desk.') : t('Submitting now will hand off to login / account creation before the request is created.')}
                       </div>
-                      <Button type="submit" className="rounded-full bg-[#173f35] px-6 text-white hover:bg-[#12342c]">
+                      <Button type="submit" className="rounded-full bg-[#ED6203] px-6 text-white hover:bg-[#d95b03]">
                         {t('Submit fast-track request')}
                         <ArrowRight size={16} />
                       </Button>
                     </div>
                   </form>
                 ) : (
-                  <div className="rounded-[1.3rem] border border-dashed border-[#d8c9b6] bg-[#fbf8f2] px-4 py-7 text-sm leading-7 text-slate-600">
+                  <div className="rounded-[1.3rem] border border-dashed border-[#cfcfcf] bg-[#f4f4f4] px-4 py-7 text-sm leading-7 text-[#555555]">
                     {t('Open the form to collect one structured lead request, then route it through login into the current project workflow.')}
                   </div>
                 )}
@@ -809,12 +816,12 @@ export default function HomePage() {
         <section id="opportunities" className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#173f35]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#173f35]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#022582]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#022582]">
                 <Search size={14} />
                 {t('Search & filter')}
               </div>
               <h2 className="mt-3">{t('Search the investment map through the signals that matter first.')}</h2>
-              <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600">
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-[#555555]">
                 {t('Filter across sectors, granular locations, investment size, project status, and investment structure using the same project records already present in the platform.')}
               </p>
             </div>
@@ -895,7 +902,7 @@ export default function HomePage() {
                       <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t(project.province)}</span>
                     </div>
 
-                    <h2 className="mb-2 text-xl font-semibold text-slate-900">{t(project.name)}</h2>
+                    <h2 className="mb-2 text-xl font-semibold text-[#333333]">{t(project.name)}</h2>
                     <div className="mb-3 flex items-center gap-2 text-sm text-slate-500">
                       <MapPin size={14} />
                       {t(project.location)}
@@ -911,7 +918,7 @@ export default function HomePage() {
                       ].map(([label, value]) => (
                         <div key={label}>
                           <div className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t(label)}</div>
-                          <div className="mt-1 text-sm font-semibold text-slate-900">{value}</div>
+                          <div className="mt-1 text-sm font-semibold text-[#333333]">{value}</div>
                         </div>
                       ))}
                     </div>
@@ -953,7 +960,7 @@ export default function HomePage() {
 
         <section id="city-briefing" className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
           <div className="mb-5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#173f35]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#173f35]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#022582]/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#022582]">
               <Newspaper size={14} />
               {t('City information')}
             </div>
@@ -965,10 +972,10 @@ export default function HomePage() {
               <Card key={article.title} className="rounded-[1.6rem] border-[#e4d6c8] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.04)]">
                 <CardContent className="px-5 py-5">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-[#173f35]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#173f35]">
+                    <span className="rounded-full bg-[#022582]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#022582]">
                       {t(article.category)}
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8c5a2b]">{article.source}</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#ED6203]">{article.source}</span>
                   </div>
                   <h3 className="mt-4 text-xl">{t(article.title)}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-600">{t(article.summary)}</p>
@@ -976,7 +983,7 @@ export default function HomePage() {
                     href={article.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#173f35] transition-colors hover:text-[#8c5a2b]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#022582] transition-colors hover:text-[#ED6203]"
                   >
                     {t('Read article')}
                     <ArrowRight size={15} />
@@ -988,15 +995,15 @@ export default function HomePage() {
         </section>
 
         <section id="support" className="mx-auto max-w-7xl px-6 py-6 pb-12 lg:px-8">
-          <Card className="overflow-hidden rounded-[2rem] border-[#d9c8b4] bg-[linear-gradient(135deg,#fff6ea_0%,#ffffff_58%,#f4f7f4_100%)] shadow-[0_24px_62px_rgba(15,23,42,0.06)]">
+          <Card className="overflow-hidden rounded-[2rem] border-[#d6d6d6] bg-[linear-gradient(135deg,#ffffff_0%,#f6f6f6_58%,#ececec_100%)] shadow-[0_24px_62px_rgba(15,23,42,0.06)]">
             <CardContent className="grid gap-6 px-6 py-6 lg:grid-cols-[0.9fr,1.1fr] lg:px-7 lg:py-7">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#8c5a2b]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#8c5a2b]">
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#ED6203]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#ED6203]">
                   <Globe2 size={14} />
                   {t('Contact Arobid for Support')}
                 </div>
                 <h2 className="mt-4">{t('Need guided support before you proceed?')}</h2>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {t('Use this form when you need help on project clarification, market entry, or government coordination. Login is required before the support request is created.')}
                 </p>
 
@@ -1007,15 +1014,15 @@ export default function HomePage() {
                     'Meeting coordination',
                     'Government workflow support',
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-[1.2rem] border border-[#e4d6c8] bg-white px-4 py-3">
-                      <CheckCircle2 size={16} className="text-[#173f35]" />
-                      <span className="text-sm text-slate-700">{t(item)}</span>
+                    <div key={item} className="flex items-center gap-3 rounded-[1.2rem] border border-[#dfdfdf] bg-white px-4 py-3">
+                      <CheckCircle2 size={16} className="text-[#022582]" />
+                      <span className="text-sm text-[#444444]">{t(item)}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <form className="grid gap-4 rounded-[1.6rem] border border-[#e4d6c8] bg-white p-4 shadow-sm md:grid-cols-2" onSubmit={submitSupportRequest}>
+              <form className="grid gap-4 rounded-[1.6rem] border border-[#dfdfdf] bg-white p-4 shadow-sm md:grid-cols-2" onSubmit={submitSupportRequest}>
                 <label className="space-y-2">
                   <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t('Company name')}</span>
                   <Input value={supportForm.companyName} onChange={(event) => updateSupportField('companyName', event.target.value)} />
@@ -1063,8 +1070,8 @@ export default function HomePage() {
                 </label>
 
                 <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
-                  <div className="text-sm text-slate-500">{role ? t('This will create a support issue immediately.') : t('Login is required before the support request is created.')}</div>
-                  <Button type="submit" className="rounded-full bg-[#173f35] px-6 text-white hover:bg-[#12342c]">
+                  <div className="text-sm text-[#666666]">{role ? t('This will create a support issue immediately.') : t('Login is required before the support request is created.')}</div>
+                  <Button type="submit" className="rounded-full bg-[#ED6203] px-6 text-white hover:bg-[#d95b03]">
                     {t('Submit support request')}
                     <ArrowRight size={16} />
                   </Button>
