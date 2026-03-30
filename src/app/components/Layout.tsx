@@ -141,19 +141,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
           onClick={handleGoHome}
           className="flex items-center gap-3 text-left transition-opacity hover:opacity-90"
         >
-          <div className="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center flex-shrink-0">
-            <Globe size={16} className="text-[#0B2447]" />
+          <div className="w-8 h-8 bg-[#ED6203] rounded-lg flex items-center justify-center flex-shrink-0">
+            <Globe size={16} className="text-white" />
           </div>
           <div>
             <div className="text-white text-sm font-semibold leading-tight">{t('Vietnam Investment Agency')}</div>
-            <div className="text-blue-300 text-xs">{t(brandSubtitle[role])}</div>
+            <div className="text-[#ffd8bf] text-xs">{t(brandSubtitle[role])}</div>
           </div>
         </button>
       </div>
 
       {/* Role label */}
       <div className="px-6 py-3">
-        <div className="text-blue-300 text-xs uppercase tracking-wider font-medium">{t(nav.label)}</div>
+        <div className="text-[#ffd8bf] text-xs uppercase tracking-wider font-medium">{t(nav.label)}</div>
       </div>
 
       {/* Nav items */}
@@ -167,11 +167,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-all group ${
                 isActive
-                  ? 'bg-white/15 text-white border-l-2 border-amber-400 pl-2.5'
-                  : 'text-blue-200 hover:bg-white/8 hover:text-white'
+                  ? 'bg-white/15 text-white border-l-2 border-[#ED6203] pl-2.5'
+                  : 'text-blue-100 hover:bg-white/8 hover:text-white'
               }`}
             >
-              <span className={isActive ? 'text-amber-400' : 'text-blue-300 group-hover:text-white'}>
+              <span className={isActive ? 'text-[#ED6203]' : 'text-[#ffd8bf] group-hover:text-white'}>
                 {item.icon}
               </span>
               <span className="text-sm">{t(item.label)}</span>
@@ -193,12 +193,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="min-w-0 flex-1">
             <div className="text-white text-sm font-medium truncate">{user.name}</div>
-            <div className="text-blue-300 text-xs truncate">{t(user.org)}</div>
+            <div className="text-[#d8e2ff] text-xs truncate">{t(user.org)}</div>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="mt-2 w-full flex items-center gap-2 px-3 py-2 text-blue-300 hover:text-white hover:bg-white/8 rounded-lg transition-colors text-sm"
+          className="mt-2 w-full flex items-center gap-2 px-3 py-2 text-[#ffd8bf] hover:text-white hover:bg-white/8 rounded-lg transition-colors text-sm"
         >
           <LogOut size={16} />
           {t('Switch Role')}
@@ -208,16 +208,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex h-screen bg-[#F1F5F9] overflow-hidden">
+    <div className="flex h-screen bg-[#f3f3f3] overflow-hidden">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-60 bg-[#0B2447] flex-shrink-0">
+      <aside className="hidden lg:flex flex-col w-60 bg-[#022582] flex-shrink-0">
         <Sidebar />
       </aside>
 
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
-          <div className="w-60 bg-[#0B2447] flex flex-col">
+          <div className="w-60 bg-[#022582] flex flex-col">
             <div className="flex justify-end p-4">
               <button onClick={() => setSidebarOpen(false)} className="text-white">
                 <X size={20} />
@@ -260,7 +260,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   type="button"
                   onClick={() => setLanguage(option)}
                   className={`px-3 py-2 text-xs font-semibold transition-colors ${
-                    language === option ? 'bg-[#0B2447] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'
+                    language === option ? 'bg-[#022582] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'
                   }`}
                 >
                   {option.toUpperCase()}
@@ -271,7 +271,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={handleGoHome}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#0B2447] hover:bg-gray-100 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#022582] hover:bg-gray-100 rounded-lg transition-colors"
             >
               <Home size={16} />
               <span className="hidden sm:inline">{t('Home')}</span>
@@ -306,11 +306,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       type="button"
                       onClick={() => handleSwitchEnvironment(roleKey)}
                       className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition-colors ${
-                        role === roleKey ? 'bg-blue-50 text-[#0B2447]' : 'text-gray-700 hover:bg-gray-50'
+                        role === roleKey ? 'bg-[#e4ebff] text-[#022582]' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       <span>{t(navConfig[roleKey].label)}</span>
-                      {role === roleKey && <span className="text-xs font-semibold text-blue-700">Current</span>}
+                      {role === roleKey && <span className="text-xs font-semibold text-[#ED6203]">Current</span>}
                     </button>
                   ))}
                 </div>
@@ -338,7 +338,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 >
                   <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
                     <span className="font-semibold text-gray-800 text-sm">{t('Notifications')}</span>
-                    <span className="text-xs text-blue-600 cursor-pointer">{unreadCount} {t('unread')}</span>
+                    <span className="text-xs text-[#ED6203] cursor-pointer">{unreadCount} {t('unread')}</span>
                   </div>
                   <div className="max-h-72 overflow-y-auto">
                     {notifications.map(n => (
@@ -351,7 +351,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                           <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${
                             n.type === 'success' ? 'bg-green-500' :
                             n.type === 'warning' ? 'bg-amber-500' :
-                            n.type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+                            n.type === 'error' ? 'bg-red-500' : 'bg-[#022582]'
                           }`} />
                           <div className="min-w-0">
                             <div className="text-sm font-medium text-gray-800">{t(n.title)}</div>
@@ -393,7 +393,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       setShowUserMenu(false);
                       resetDemoData();
                     }}
-                    className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#0B2447] transition-colors"
+                    className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#022582] transition-colors"
                   >
                     <Settings size={15} />
                     {t('Reset Demo Data')}

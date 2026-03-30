@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, BarChart3, ShieldAlert } from 'lucide-react';
+import { ArrowRight, BarChart3, MapPin, ShieldAlert } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { translateText } from '../../utils/localization';
 import { CompletionMeter } from '../../components/ui/completion-meter';
 import { DataRow } from '../../components/ui/data-row';
 import { StatusPill } from '../../components/ui/status-pill';
+import { ImageWithFallback } from '../../components/figma/ImageWithFallback';
 
 function getAverage(values: number[]) {
   if (!values.length) return 0;
@@ -99,27 +100,72 @@ export default function ExecutiveDashboardPage() {
           {snapshotProjects.map((project) => {
             const dataSummary = getProjectDataCompletenessSummary(project.id);
             const processingSummary = getProjectProcessingSummary(project.id);
+            const projectIssueItems = issues.filter((item) => item.projectId === project.id);
+            const completedIssueCount = projectIssueItems.filter((item) => item.status === 'resolved' || item.status === 'closed').length;
+            const projectB2gRequests = serviceRequests.filter((item) => item.projectId === project.id);
+            const completedB2gCount = projectB2gRequests.filter((item) => item.status === 'approved' || item.status === 'rejected').length;
             return (
-              <DataRow key={project.id} className="items-start">
-                <div className="min-w-0 flex-1">
-                  <div className="mb-1 flex flex-wrap items-center gap-2">
-                    <div className="text-sm font-semibold text-slate-900">{t(project.name)}</div>
-                    <StatusPill tone={project.status === 'published' ? 'success' : project.status === 'review' ? 'warning' : 'default'}>
-                      {t(project.status.replace('_', ' '))}
-                    </StatusPill>
-                  </div>
-                  <div className="text-xs text-slate-500">{t(project.sector)} / {t(project.province)} / ${project.budget}M</div>
+              <DataRow key={project.id} className="group items-stretch gap-5 overflow-hidden p-0">
+                <div className="relative w-[320px] shrink-0 self-stretch overflow-hidden border-r border-border bg-slate-100">
+                  <ImageWithFallback
+                    src={project.image}
+                    alt={t(project.name)}
+                    className="absolute inset-0 h-full w-full scale-[1.08] object-cover"
+                  />
                 </div>
-                <div className="w-full max-w-56 space-y-3">
-                  <div>
-                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{t('Data Completeness')}</div>
-                    <CompletionMeter value={dataSummary.percentage} />
-                    <div className="mt-1 text-xs text-slate-500">{dataSummary.completed}/{dataSummary.total}</div>
+
+                <div className="flex-1 px-5 py-5">
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <StatusPill tone={project.status === 'published' ? 'success' : project.status === 'review' ? 'warning' : 'default'}>
+                      {t(project.stage)}
+                    </StatusPill>
+                    <StatusPill tone="info">{t(project.sector)}</StatusPill>
+                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t(project.province)}</span>
                   </div>
-                  <div>
-                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{t('Project Processing')}</div>
-                    <CompletionMeter value={processingSummary.percentage} />
-                    <div className="mt-1 text-xs text-slate-500">{processingSummary.completed}/{processingSummary.total}</div>
+
+                  <h2 className="mb-2 text-xl font-semibold text-slate-900">{t(project.name)}</h2>
+                  <div className="mb-3 flex items-center gap-2 text-sm text-slate-500">
+                    <MapPin size={14} />
+                    {t(project.location)}
+                  </div>
+                  <p className="max-w-3xl text-sm leading-7 text-slate-600">{t(project.description)}</p>
+
+                  <div className="mt-5 grid gap-4 sm:grid-cols-4">
+                    {[
+                      ['Investment scale', `$${project.budget}M`],
+                      ['Minimum ticket', `$${project.minInvestment}M`],
+                      ['IRR', t(project.returnRate)],
+                      ['Timeline', t(project.timeline)],
+                    ].map(([label, value]) => (
+                      <div key={label}>
+                        <div className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t(label)}</div>
+                        <div className="mt-1 text-sm font-semibold text-slate-900">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {(project.highlights ?? []).slice(0, 4).map((highlight) => (
+                      <span key={highlight} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+                        {t(highlight)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex min-h-full w-full max-w-56 flex-col justify-center bg-transparent px-4 py-5 transition-colors group-hover:bg-slate-50">
+                  <div className="grid gap-3">
+                    {[
+                      ['Data Completeness', `${dataSummary.completed}/${dataSummary.total}`],
+                      ['Project Processing', `${processingSummary.completed}/${processingSummary.total}`],
+                      ['Issue', `${completedIssueCount}/${projectIssueItems.length}`],
+                      ['B2G request', `${completedB2gCount}/${projectB2gRequests.length}`],
+                    ].map(([label, value]) => (
+                      <div key={label} className="rounded-lg border border-border bg-white px-3 py-3">
+                        <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{t(label)}</div>
+                        <div className="mt-1 text-sm font-semibold text-slate-900">{value}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </DataRow>

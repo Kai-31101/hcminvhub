@@ -20,16 +20,13 @@ export default function ExecutiveAnalyticsPage() {
   const t = (value: string) => translateText(value, language);
 
   const funnelData = useMemo(() => {
-    const follows = projects.reduce((sum, item) => sum + item.followers, 0);
     return [
-      { stage: 'Explorer Views', count: Math.max(projects.length * 120, follows + 50) },
-      { stage: 'Project Follows', count: follows },
       { stage: 'Intake Submitted', count: opportunities.length },
       { stage: 'Due Diligence', count: opportunities.filter((item) => item.stage === 'due_diligence').length },
       { stage: 'Approved', count: opportunities.filter((item) => item.stage === 'approved').length },
       { stage: 'In Execution', count: opportunities.filter((item) => ['approved', 'negotiation'].includes(item.stage)).length },
     ];
-  }, [opportunities, projects]);
+  }, [opportunities]);
 
   const sectorData = useMemo(() => {
     const totals = projects.reduce<Record<string, number>>((accumulator, project) => {
@@ -78,7 +75,7 @@ export default function ExecutiveAnalyticsPage() {
             <XAxis dataKey="stage" tick={{ fontSize: 11 }} />
             <YAxis tick={{ fontSize: 11 }} />
             <Tooltip formatter={(value) => [value, t('Count')]} />
-            <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+            <Bar dataKey="count" radius={[6, 6, 0, 0]} label={{ position: 'top', fill: '#333333', fontSize: 12, fontWeight: 600 }}>
               {funnelData.map((item, index) => (
                 <Cell key={item.stage} fill={['#0f4c81', '#0ea5e9', '#7c3aed', '#d97706', '#16a34a', '#dc2626'][index % 6]} />
               ))}
